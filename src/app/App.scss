@@ -1,0 +1,17 @@
+
+    @use './styles/helpers/index.scss' as *;
+
+    a {
+  text-decoration: none;
+  color: inherit;
+  &:hover{
+    color:black;
+    }
+}
+
+.error-log  {
+  
+  color:red;
+
+  background-color: red;
+}

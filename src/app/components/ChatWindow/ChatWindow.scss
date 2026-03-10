@@ -1,0 +1,63 @@
+.chat-window{
+    display: flex;
+    padding: 5px 16px;
+    gap:16px;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 10px;
+        // наследуем цвет родителя
+    
+    // @include hover{
+    //    background-color: #e2e2e279;
+    // }
+    &:hover{
+         background-color: #e2e2e279;
+
+    }
+
+    &__photo{
+        border-radius: 50%;
+        // @include square(65px);
+        width: 5rem;
+        height: auto;
+    }
+    &__description{
+        
+        width: 100% ;
+        &-top, &-down{
+            display: flex;
+            justify-content: space-between;  
+            
+        }
+        &-down{
+            &-col-message{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #78E378;
+                border-radius: 50%;
+                // @include square(23px);
+                width: 20px;
+                height: 20px;
+                color: white;
+                font-size: 1.1rem;
+                font-weight: 500;
+            }
+
+            &-message{
+                // display: flex;
+                // justify-content: center;
+                max-width: 301px; // или другое значение, которое тебе подходит
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+
+                
+                
+                
+            }
+        }
+    }
+    
+
+}

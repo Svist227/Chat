@@ -1,0 +1,57 @@
+@use '../../../app/styles/helpers/index.scss' as *;
+
+.topbar{
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background-color: white;
+
+    &__info{
+        display: flex;
+        align-items: center;
+        gap:16px;
+
+        &-burger{
+            cursor: pointer;
+            display: none;
+            width: 30px;
+            height: 30px;
+            @media (max-width:1024px) {
+                display: block;
+               
+            }
+        }
+        &-typing{
+            
+        }
+        
+        &-photo{
+            // @include square(50px);
+            border-radius: 15px;
+            width: 50px;
+            height: 50px;
+        }
+
+    }
+    &__icons{
+
+        &-exit{
+            box-sizing: border-box;
+
+        }
+        display: flex;
+        align-items: center; 
+        
+        & img {
+            // @include square(50px);
+             width: 50px;
+            height: 50px;
+            cursor: pointer;
+            &:hover{
+            opacity: 0.5;
+            background-color: #d4d4d4;
+        }   
+        }
+    }
+
+}
