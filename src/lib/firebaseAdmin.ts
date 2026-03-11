@@ -14,12 +14,6 @@ if (!getApps().length) {
   })
 }
 
-console.log(
-  'admin apps:',
-  getApps().length,
-  'project:',
-  process.env.FIREBASE_PROJECT_ID
-)
 
 
 export const adminAuth = getAuth()
