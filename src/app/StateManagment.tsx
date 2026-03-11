@@ -6,7 +6,7 @@ interface Menu{
   setIsChatsOpen: () => void
 }
 export const useChatsOpen = create<Menu>(set => ({
-    isChatsOpen:true,
+    isChatsOpen:false,
     setIsChatsOpen: () => set(state => ({
       isChatsOpen: !state.isChatsOpen
     }))

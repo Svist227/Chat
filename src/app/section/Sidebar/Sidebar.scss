@@ -1,6 +1,5 @@
 .sidebar{
-    display: flex;
-    
+    display: flex; 
     flex-direction: column;
     gap:8px;
     width: 400px;
@@ -8,11 +7,11 @@
     transition: transform 0.5s ease;
     overflow: hidden;
     @media (max-width: 1024px) {
-        &:not(.is-open){
+        &:not(.is-close){
            
         }
 
-        &.is-open{
+        &.is-close{
             width: 0;
             transform: translateX(-100%);
            

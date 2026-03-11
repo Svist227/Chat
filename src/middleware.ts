@@ -1,8 +1,5 @@
 
-export {default} from 'next-auth/middleware'
-  
-
-  
+// export {default} from 'next-auth/middleware'
   import { NextResponse } from 'next/server'
   import { NextRequest } from 'next/server'
   import { getToken } from 'next-auth/jwt'
@@ -17,8 +14,9 @@ export {default} from 'next-auth/middleware'
 
     const pathname = req.nextUrl.pathname
 
-    
-    if (!isAuth && pathname !== '/login') {
+      const publicRoutes = ['/login', '/register']
+
+    if (!isAuth && !publicRoutes.includes(pathname)) {
       return NextResponse.redirect(new URL('/login', req.url))
     }
 

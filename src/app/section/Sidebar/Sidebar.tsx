@@ -12,7 +12,7 @@ const Sidebar:any = ({children}:ComponentProps) => {
     return (
         <>
             <div className={classNames('sidebar', {
-                'is-open': isMenuOpen
+                'is-close': isMenuOpen
             })}
             
             >

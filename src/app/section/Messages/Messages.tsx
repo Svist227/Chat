@@ -28,6 +28,8 @@ const Messages = () => {
             BottomRef.current?.scrollIntoView({ behavior: 'smooth' })
 
         }
+
+    console.log('Выбранный user', selectedUser)
     
     const RefMessageId = useMessageIdStore(state => state.id) 
     const CurrentUser = session.data?.user
