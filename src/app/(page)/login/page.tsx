@@ -13,7 +13,6 @@ export default function Login(){
     const router = useRouter()
 	const [error, setErrror] = useState<string>('')
     const handleClickGoogle =  () => {
-        console.log('нажал')
          signIn('google',{ callbackUrl: '/' });  
 
     }

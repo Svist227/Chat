@@ -23,7 +23,7 @@ const   TopBar = () => {
     const setMode = useChatMode(state => state.setMode)
     const value = useValueSearch(state => state.currentValue)
     const {triggerFocus}  = useFocusStore();
-
+    const isOpenMenu = useChatsOpen(state => state.setIsChatsOpen)
     // Realtime database запись текущего пользователя
     useEffect(() => {
         if (!currentUser) return
@@ -88,6 +88,8 @@ const   TopBar = () => {
     const handleClickSearch = (e:any) => {
         setMode('messages')
         triggerFocus()
+        isOpenMenu()
+
     }
 
 

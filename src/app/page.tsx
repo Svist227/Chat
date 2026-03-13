@@ -15,10 +15,7 @@ import SliderTabs from './components/SliderTabs/SliderTabs'
 
 function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
+   
   const mode = useChatMode(state => state.mode)
   const setMode = useChatMode(state => state.setMode)
   const selectedUser = usesChatStore(state => state.selectedUser)
