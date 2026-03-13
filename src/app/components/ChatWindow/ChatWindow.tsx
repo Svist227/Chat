@@ -1,6 +1,6 @@
 'use client'
 import './ChatWindow.scss'
-import {useMessageIdStore, usesChatStore} from '@/app/StateManagment';
+import {useMessageIdStore, useMessageUi, usesChatStore} from '@/app/StateManagment';
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 
@@ -20,7 +20,8 @@ interface ChatWindowProps {
 const ChatWindow = ({UserParams, mode = 'default'}: ChatWindowProps) => {
     const setSelectedUser = usesChatStore(state => state.setSelectedUser)
     const setMessageId = useMessageIdStore(state => state.setMessageId) 
-   
+    const setselectedUserId = useMessageUi(state => state.selectChat)
+
     const getId = () => {
         if (mode === 'search') {
             setMessageId(UserParams.id)
@@ -32,6 +33,10 @@ const ChatWindow = ({UserParams, mode = 'default'}: ChatWindowProps) => {
       displayName: UserParams.name,
       photoURL: UserParams.photo,
     })
+    
+    setselectedUserId(UserParams.id)
+
+    
     }
     
     return (

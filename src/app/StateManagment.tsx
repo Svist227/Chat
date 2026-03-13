@@ -105,21 +105,31 @@ export const useMessageIdStore = create<MessageID>(set => ({
 
 
 interface Message {
-id:string
-text: string
-senderId: string
-createdAt: number
+  id: string;
+  text: string;
+  senderId: string;
+  createdAt: number;
 }
 
-interface DataMessage {
-  messages:Message[]
-  addMessage: (param:Message) => void
+interface ChatState {
+  selectedChatId: string | null;
+  messages: {
+    [chatId: string]: Message[];
+  };
+  selectChat: (id: string) => void;
+  addMessage: (chatId: string, message: Message) => void;
 }
 
-export const useMessageUi = create<DataMessage>((set) => ({
-  messages: [],
-  addMessage: (param) =>
-     set((state) =>({
-      messages:[...state.messages, param]
-    }))
-}))
+export const useMessageUi = create<ChatState>((set) => ({
+  selectedChatId: null,
+  messages: {}, // Объект, ключи — chatId
+  selectChat: (id: string) =>
+    set({ selectedChatId: id }),
+  addMessage: (chatId: string, message: Message) =>
+    set((state) => ({
+      messages: {
+        ...state.messages,
+        [chatId]: [...(state.messages[chatId] || []), message],
+      },
+    })),
+}));

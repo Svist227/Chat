@@ -110,7 +110,10 @@ const   TopBar = () => {
             <div className="topbar__info">
                  <img onClick={MenuOpen} className = 'topbar__info-burger'src='burger.svg' alt="button__burger" />
                 {selectedUser && (
-                    <img src={selectedUser?.photoURL} 
+                    <img src={selectedUser?.photoURL 
+                ?  selectedUser.photoURL
+                : 'users/Avatar.svg'} 
+                    
                 //динамик
                 className='topbar__info-photo' alt="photo" />
                 )}

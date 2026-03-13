@@ -21,6 +21,8 @@ createdAt: number
 
 const Messages = () => {
     const selectedUser = usesChatStore(state => state.selectedUser)
+    const selectedUserId = useMessageUi(state => state.selectedChatId)
+
     const session = useSession()
     const user = session.data?.user
     const BottomRef = useRef<HTMLDivElement>(null);
@@ -37,9 +39,11 @@ const Messages = () => {
     const setCurrentUser  = useCurrentUser(state => state.setcurrentUser) // достаем экшен
     const messageRefs = useRef<Record<string, HTMLDivElement | null>>({})
 
-    // соединение Ui и сообщений с бд. в единый поток. 
-    const messageUi = useMessageUi(state => state.messages) // массив Ui ообщений
-    const [messages, setMessages] = useState<any[]>([]) // массив сообщений с бд
+    // соединение Ui и сообщений с бд. в единый поток.
+  const messageUi = useMessageUi(state =>
+  selectedUserId ? state.messages[selectedUserId] : undefined
+) ?? []  
+ const [messages, setMessages] = useState<any[]>([]) // массив сообщений с бд
    const dbMessages = messages
   .map(msg => {
     if (!msg.createdAt) return null
@@ -61,7 +65,7 @@ const Messages = () => {
   const messageMap = new Map<string, Message>()
 
   // сначала локальные (optimistic)
-  messageUi.forEach(m => messageMap.set(m.id, m))
+  messageUi.forEach((m) => messageMap.set(m.id, m))
 
   // потом серверные — они перезапишут локальные с тем же id
   dbMessages.forEach(m => messageMap.set(m.id, m))

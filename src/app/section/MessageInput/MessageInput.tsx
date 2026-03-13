@@ -26,7 +26,7 @@ const MessageInput = () => {
         if (!currentUser || !selectedUser) return
 
         // UI 
-        addMessageUi({
+        addMessageUi(selectedUser.id,{
           id: tempId, 
           text:value,
           senderId:currentUser.uid,

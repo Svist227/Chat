@@ -7,6 +7,15 @@ import { useRef } from 'react';
 const SearchBar = () => {
     const {users, mychats} = useGetDataUser()
     console.log(users)
+
+
+    if(!users){
+        console.log('Нет данных')
+        
+    }
+
+
+
     const setMode = useChatMode(state => state.setMode)
     const mode = useChatMode(state => state.mode)
     console.log('мод:', mode)
