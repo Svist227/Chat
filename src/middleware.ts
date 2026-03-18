@@ -7,25 +7,31 @@
 
   
   export async function middleware(req: NextRequest) {
-     const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
-      const isAuth = !!token
+    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
+    const isAuth = !!token
     console.log('isAuth', isAuth)
+    console.log('token in middleware', token); // <- убедись, что username есть
+
 
 
     const pathname = req.nextUrl.pathname
+    const publicRoutes = ['/login', '/register','/set-username']
 
-      const publicRoutes = ['/login', '/register']
-
+    // Не авторизован
     if (!isAuth && !publicRoutes.includes(pathname)) {
       return NextResponse.redirect(new URL('/login', req.url))
     }
 
-    
-
-    
-    if ( isAuth && pathname !== '/') {
-      return NextResponse.redirect(new URL('/', req.url))
+    // Авторизован но без username
+    if ( isAuth && !token?.username && pathname !== '/set-username') {
+       return NextResponse.redirect(new URL('/set-username', req.url))
     }
+
+    console.log('token?.username', token?.username)
+    // авторизован и username есть, но пытается зайти на login
+  if (isAuth && token?.username && publicRoutes.includes(pathname)) {
+    return NextResponse.redirect(new URL('/', req.url))
+  }
 
 
     return NextResponse.next();
@@ -38,3 +44,6 @@
 
 
   //  matcher:   '/((?!_next|api|.*\\..*).*)',
+
+
+  // кароче проблема только с редиректом. там мидл мне мешает. он видимо не дает нормально отработать редиректу. я так понимаю, что при редиректе на /set-username, мидл видит, что юзер авторизован, но у него нет юзернейма, и снова кидает на /set-username. и так по кругу. нужно как-то сделать исключение для этого роута в мидле, чтобы он не мешал редиректу отрабатывать. я уже пробовал разные варианты с matcher, но пока безуспешно. может ты подскажешь, как правильно настроить matcher, чтобы он пропускал редирект на /set-username?

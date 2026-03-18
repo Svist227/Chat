@@ -5,6 +5,9 @@ const nextConfig: NextConfig= {
 //  eslint: {
 //     ignoreDuringBuilds: true, // попозже вернемся. там ошибки рекомендованого характера
 //   },
+ sassOptions: {
+ silenceDeprecations: ['import'],
+ },
 };
 
 export default nextConfig;

@@ -60,17 +60,37 @@ export const authConfig: AuthOptions = {
     },
     callbacks: {
 
- async jwt({ token, user }) {
-    // user есть только при первом логине
-    if (user) {
-      token.uid = user.id;
+async jwt({ token, user }) {
+  // 🔥 только при логине
+  if (user) {
+    token.uid = user.id
+  }
+  console.log("user", user)
+
+  // дальше используем uid
+  if (token.uid) {
+    const { doc, getDoc } = await import("firebase/firestore")
+    const { firestore } = await import("@/firebase")
+
+    const userRef = doc(firestore, "users", token.uid as string)
+    const snap = await getDoc(userRef)
+
+    if (snap.exists()) {
+      console.log("snap.data().username", snap.data().username)
+      token.username = snap.data().username // записали в токен юзернейм
     }
-    return token;
-  },
+  }
+
+  return token
+},
 
   async session({ session, token }) {
+    console.log("token в session", session.user)
+    console.log("token в session", token)
     if (session.user) {
       session.user.uid = token.uid as string;
+      session.user.username = token.username as string
+
     }
     return session;
   },
@@ -85,6 +105,7 @@ export const authConfig: AuthOptions = {
       await setDoc(userRef, {
         uid: user.id,
         displayName: user.name ?? null,
+        username: null,
         email: user.email ?? null,
         photoURL: user.image ?? null,
         createdAt: new Date(),
@@ -129,3 +150,54 @@ export const authConfig: AuthOptions = {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// async jwt({ token, user }) {
+//   interface MyUser {
+//   id: string;
+//   name?: string;
+//   email?: string;
+//   username?: string | null;
+//   image?: string | null;
+// }
+// console.log('userr до проверки')
+// console.log(user)
+// if (user) {
+//   console.log('userr после')
+
+//   const u = user as MyUser;
+//   token.uid = u.id;
+//   token.username = u.username ?? null;
+//    console.log('u.username', u.username)
+//    console.log('u.id', u.id)
+//       const { doc, getDoc } = await import("firebase/firestore")
+//     const { firestore } = await import("@/firebase")
+
+//     const userId = (user as any).id || token.sub;
+//     const userRef = doc(firestore, "users", userId);  
+//     const snap = await getDoc(userRef)
+
+//     if (snap.exists()) {
+//       token.username = snap.data().username
+//     }
+  
+//     }
+//     return token;
+//   },
+
+
+
+//Кароче надо сбросить эту чертову сессию. а тосейчас user underfined. 
