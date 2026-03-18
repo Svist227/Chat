@@ -7,7 +7,7 @@ import Link from 'next/link'
 interface Chat {
     id:string,
     photo:string,
-    name:string,
+    username:string,
     message: string;
     data: string | null;
 //   colMessage: number;
@@ -30,7 +30,7 @@ const ChatWindow = ({UserParams, mode = 'default'}: ChatWindowProps) => {
       // добавление useroв в state/
          setSelectedUser({
       id: UserParams.id,
-      displayName: UserParams.name,
+      username: UserParams.username,
       photoURL: UserParams.photo,
     })
     
@@ -51,7 +51,7 @@ const ChatWindow = ({UserParams, mode = 'default'}: ChatWindowProps) => {
             <div className="chat-window__description">
                 <div className="chat-window__description-top">
                     <div className="chat-window__description-top-name">
-                      <h4 className='h4'>{UserParams.name}</h4>
+                      <h4 className='h4'>{UserParams.username}</h4>
                     </div>
                     {UserParams.data && (
                         <div className="chat-window__description-top-time">

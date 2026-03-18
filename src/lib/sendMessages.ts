@@ -11,7 +11,7 @@ interface CurrentUserCustom {
 }
 interface SelectedUser {
   id: string
-  displayName: string
+  username: string
   photoURL?: string
 }
 interface DataMessages{
@@ -40,11 +40,11 @@ export const SendMessages = async ({id,value,currentUser,selectedUser}:DataMessa
           members: [currentUser.uid, selectedUser.id],
           membersInfo: {
             [currentUser.uid]:{
-              displayName: currentUser.name,
+              username: currentUser.name,
               photoURL: currentUser.image
             },
             [selectedUser.id]:{
-              displayName: selectedUser.displayName,
+              username: selectedUser.username,
               photoURL: selectedUser.photoURL
             }
           },

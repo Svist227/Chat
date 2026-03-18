@@ -44,7 +44,7 @@ export const authConfig: AuthOptions = {
             else if(currentUser && currentUser.password === credentials.password){
                return {
                 id: userDoc.id,
-                name: currentUser.displayName,
+                name: currentUser.username,
                 email: currentUser.email,
                 image: currentUser.photoURL, // вернули user с полями без пароля соо
   }
@@ -104,7 +104,6 @@ async jwt({ token, user }) {
     if (!snap.exists()) {
       await setDoc(userRef, {
         uid: user.id,
-        displayName: user.name ?? null,
         username: null,
         email: user.email ?? null,
         photoURL: user.image ?? null,
@@ -128,7 +127,7 @@ async jwt({ token, user }) {
                           members: [user.id, user.id],
                           membersInfo: {
                             [user.id]:{
-                              displayName: 'Избранное',
+                              username: 'Избранное',
                               photoURL: 'favorites.png'
                             }
                           },

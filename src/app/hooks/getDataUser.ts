@@ -9,7 +9,7 @@ import {useChatsOpen, usesChatStore, useCurrentUser} from '@/app/StateManagment'
 import { getChatId } from '@/app/utils/getChatId';
 type MemberInfo = {
     uid:string,
-    displayName:string | null
+    username:string | null
     photoURL:string | null
 }
 
@@ -28,7 +28,7 @@ membersInfo: Record<string, MemberInfo>
 }
 interface UserFilter {
   uid: string,
-  displayName:string | null
+  username:string | null
   email:string | null
   photoURL: string | null
   createdAt: Timestamp
@@ -42,12 +42,14 @@ export const useGetDataUser = () => {
     const session = useSession()
     const CurrentUser = session.data?.user
 
+    console.log('Текущий user в хуке', CurrentUser?.username)
+
 
      // Получение user-ов всех
         useEffect(() => {
             console.log("Получение всех user-ов")
             const usersCollectionRef = collection(firestore, 'users');
-            const q = query(usersCollectionRef, orderBy('displayName')); // Опционально: сортируем по имени пользователя
+            const q = query(usersCollectionRef, orderBy('username')); // Опционально: сортируем по имени пользователя
     
             // Подписываемся на изменения в коллекции в реальном времени
             const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -110,7 +112,7 @@ export const useGetDataUser = () => {
             chatId: doc.id,
             otherUser: {
                 uid: otherUserId,
-                displayName:data.membersInfo[otherUserId].displayName,
+                username:data.membersInfo[otherUserId].username,
                 photoURL:data.membersInfo[otherUserId].photoURL
             },
             lastMessage: data.lastMessage,

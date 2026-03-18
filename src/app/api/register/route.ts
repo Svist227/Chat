@@ -19,7 +19,7 @@ export async function POST(request: Request){
     if(snapshot.empty){ // если не сущ
         await createUser({
             uid:'',
-            displayName: username,
+            username: username,
             email: email,
             password:password,
             photoURL:''

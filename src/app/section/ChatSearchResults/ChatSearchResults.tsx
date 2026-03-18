@@ -10,7 +10,7 @@ import ZeroState from '@/app/components/ZeroState/ZeroState'
 
 interface UserFilter {
   uid: string,
-  displayName:string | null
+  username:string | null
   email:string | null
   photoURL: string | null
   createdAt: Timestamp
@@ -30,7 +30,7 @@ const ChatSearchResults = ({data}:UserData) => {
                 UserParams={{
                     id: user.uid,
                     photo: user.photoURL || "",
-                    name:user.displayName || "Без имени",
+                    username:user.username || "Без имени",
                     message: '',
                     data: ''
                     

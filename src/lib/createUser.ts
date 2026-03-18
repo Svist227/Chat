@@ -4,7 +4,7 @@ import { firestore } from "@/firebase"
 
 type UserParams = {
   uid:string ,
-  displayName: string| null,
+  username: string | null,
   email:string | null,
   password: string | null,
   photoURL:string | null
@@ -26,7 +26,7 @@ export const createUser = async (user: UserParams) => {
     userRef,
     {
       uid:userRef.id,
-      displayName: user.displayName,
+      username: user.username || null,
       email: user.email,
       password:user.password,
       photoURL: user.photoURL || null,

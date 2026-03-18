@@ -35,7 +35,7 @@ const Messages = () => {
     
     const RefMessageId = useMessageIdStore(state => state.id) 
     const CurrentUser = session.data?.user
-    
+    console.log('Текущий user с ref', RefMessageId)
     const setCurrentUser  = useCurrentUser(state => state.setcurrentUser) // достаем экшен
     const messageRefs = useRef<Record<string, HTMLDivElement | null>>({})
 
@@ -89,14 +89,14 @@ useEffect(()=> {
     if (user) {
       interface UserData {
         uid:string,
-        displayName?:string | null,
+        username?:string | null,
         photoURL?: string | null,
         email:string ;
 
       }
       const userData:UserData = {
         uid: user.uid as string,
-        displayName: user.name,
+        username: user.name,
         photoURL:user.image,
         email: user.email as string
         

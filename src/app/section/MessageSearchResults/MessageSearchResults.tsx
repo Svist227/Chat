@@ -36,8 +36,8 @@ const MessageSearchResults = ({data}:MessageData) => {
     : selectedUser?.photoURL;
 
   const userName = isMyMessage
-    ? currentUser?.displayName
-    : selectedUser?.displayName;
+    ? currentUser?.username
+    : selectedUser?.username;
 
     const dataRU = message.createdAt.toDate().toLocaleTimeString([], {
         hour: '2-digit',
@@ -49,7 +49,7 @@ const MessageSearchResults = ({data}:MessageData) => {
                 UserParams={{
                     id: message.id,
                     photo:  userPhoto || '',
-                    name:userName || "Без имени",
+                    username:userName || "Без имени",
                     message: message.text,
                     data: dataRU,
 

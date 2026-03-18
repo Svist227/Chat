@@ -16,12 +16,12 @@ export const useChatsOpen = create<Menu>(set => ({
 
 interface SelectedUser {
   id: string
-  displayName: string
+  username: string
   photoURL?: string
 }
 interface CurrentUser {
   uid: string
-  displayName?:string | null,
+  username?:string | null,
   photoURL?: string | null,
   email:string 
   

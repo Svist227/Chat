@@ -120,8 +120,8 @@ const   TopBar = () => {
                 className='topbar__info-photo' alt="photo" />
                 )}
                 <div className="topbar__info-description">
-                    <h4>{selectedUser?.displayName}</h4> 
-                    <p>{selectedUser.displayName !=='Избранное' && (statusText)}</p>
+                    <h4>{selectedUser?.username}</h4> 
+                    <p>{selectedUser.username !=='Избранное' && (statusText)}</p>
                 </div>
             </div>
             <div className="topbar__icons">

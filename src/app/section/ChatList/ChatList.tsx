@@ -8,6 +8,8 @@ import { useGetDataUser } from '@/app/hooks/getDataUser';
         const session = useSession()
         const CurrentUser = session.data?.user
         const {users, mychats} = useGetDataUser()
+
+        console.log('мои чаты', mychats)
         const chatUserIds = new Set(mychats.map(chat => chat.otherUser.uid)) // множ-ство uid с кем есть чатов
         const recommendedUsers = users.filter(user => {
           if (CurrentUser?.uid == user.uid) return // чат с сам собой
@@ -27,7 +29,7 @@ import { useGetDataUser } from '@/app/hooks/getDataUser';
                         <ChatWindow key={index} UserParams = {{
                             id: chat.otherUser.uid,
                             photo: chat.otherUser.photoURL || "",
-                            name:chat.otherUser.displayName || "Без имени",
+                            username:chat.otherUser.username || "Без имени",
                             message:chat.lastMessage,
                             data: chat.time,
                             // colMessage:chat.messages.length
@@ -44,7 +46,7 @@ import { useGetDataUser } from '@/app/hooks/getDataUser';
                     <ChatWindow key={index2} UserParams={{
                         id: user.uid,
                         photo:user.photoURL || '',
-                        name:user.displayName|| "Без имени",
+                        username:user.username|| "Без имени",
                         message:"",
                         data:""
 

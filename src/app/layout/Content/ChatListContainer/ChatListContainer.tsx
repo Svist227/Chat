@@ -20,7 +20,7 @@ const ChatListContainer = ({searchMode}:Item) => {
     // фильтрация по имени 
         let userFilter = users.filter((user)=> {
             if(!value) return 
-            return user.displayName?.toLowerCase().includes(value.toLowerCase())
+            return user.username?.toLowerCase().includes(value.toLowerCase())
         }
         )
 
