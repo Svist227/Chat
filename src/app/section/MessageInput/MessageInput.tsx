@@ -1,12 +1,11 @@
 import './MessageInput.scss'
 import { useEffect, useState } from 'react';
 
-import {app, auth, firestore} from '@/firebase'
-import { getFirestore, collection, addDoc, serverTimestamp, doc,setDoc,getDoc,updateDoc, Timestamp } from "firebase/firestore"; // Добавлены collection, addDoc, serverTimestamp
+
 import { useMessageUi, usesChatStore } from '@/app/StateManagment';
 import { getChatId } from '@/app/utils/getChatId'
 import { useSession } from 'next-auth/react';
-import { getDatabase, ref, child, push, update } from "firebase/database";
+import { getDatabase, ref,update } from "firebase/database";
 import { SendMessages } from '@/lib/sendMessages';
 
 const MessageInput = () => {

@@ -3,13 +3,13 @@ import { FormEventHandler } from "react"
 import '../login/login.scss'
 import { useRouter } from 'next/navigation'
 import { useSession } from "next-auth/react"
+import Form from "@/app/section/Form/Form"
 export default function SetUsername(){
 	const router = useRouter()
 	const { update } = useSession()
+
      const handleClickCustom:FormEventHandler<HTMLFormElement> = async (event) => {
             event.preventDefault() // остановка всплытия
-            
-    
             const formData = new FormData(event.currentTarget)
 
 		    const data = Object.fromEntries(formData.entries())
@@ -33,32 +33,8 @@ export default function SetUsername(){
 	}
 
     return (
-            <main className="main">
-	<div className="container">
-		<section className="wrapper">
-			<div className="heading">
-				<h1 className="text text-large">Введите ваш username</h1>
-			</div>
-			<form name="choose-username" className="form" onSubmit={handleClickCustom}>
-				<div className="input-control">
-					<label htmlFor="username" className="input-label" hidden>Password</label>
-					<input type="text" name="username" id="username" className="input-field" placeholder="username" required/>
-				</div>
-				<div className='error-log'>
-					{/* <p> {error }</p> */}
-				</div>
-				<div className="input-control">
-					{/* <a href="#" className="text text-links">Forgot Password</a> */}
-					<button type="submit" name="submit" className="input-submit" >
-            Sign In
-          </button>
-				</div>
-			</form>
-			
-			
-		</section>
-	</div>
-</main>
+<Form mode = 'setUsername' onSubmit={handleClickCustom}/>
+
 
         
     )

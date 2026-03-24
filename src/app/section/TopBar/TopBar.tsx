@@ -50,9 +50,6 @@ const   TopBar = () => {
         setStatus(data?.state ?? null)
         setLastLogin(data?.lastLogin ?? null)
     })
-
-   
-
     
     return () => unsub()
     
@@ -72,9 +69,6 @@ const   TopBar = () => {
          setPrint(data?.prints ?? null)
     })
 
-   
-
-    
     return () => unsub()
 }, [selectedUser])
 

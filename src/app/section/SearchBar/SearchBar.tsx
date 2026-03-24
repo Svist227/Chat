@@ -1,21 +1,9 @@
 import { useEffect, useState } from 'react'
 import './SearchBar.scss'
-import { useGetDataUser } from '@/app/hooks/getDataUser'
 import { useChatMode, useFocusStore, useValueSearch } from '@/app/StateManagment'
 import { useRef } from 'react';
 
 const SearchBar = () => {
-    const {users, mychats} = useGetDataUser()
-    console.log(users)
-
-
-    if(!users){
-        console.log('Нет данных')
-        
-    }
-
-
-
     const setMode = useChatMode(state => state.setMode)
     const mode = useChatMode(state => state.mode)
     console.log('мод:', mode)

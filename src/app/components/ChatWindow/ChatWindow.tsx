@@ -1,8 +1,7 @@
 'use client'
 import './ChatWindow.scss'
 import {useMessageIdStore, useMessageUi, usesChatStore} from '@/app/StateManagment';
-import { useParams } from 'next/navigation'
-import Link from 'next/link'
+
 
 interface Chat {
     id:string,

@@ -3,6 +3,7 @@ import { Timestamp } from 'firebase/firestore'
 import ChatWindow from '@/app/components/ChatWindow/ChatWindow'
 import { useCurrentUser, usesChatStore } from '@/app/StateManagment'
 import ZeroState from '@/app/components/ZeroState/ZeroState'
+import { useSession } from 'next-auth/react'
 
 interface Message {
     createdAt:Timestamp
@@ -19,7 +20,8 @@ interface MessageData {
 
 
 const MessageSearchResults = ({data}:MessageData) => {
-    const currentUser = useCurrentUser(state => state.currentUser)
+    const sesion = useSession()
+    const currentUser = sesion.data?.user 
     const selectedUser = usesChatStore(state => state.selectedUser)
   
     
@@ -32,7 +34,7 @@ const MessageSearchResults = ({data}:MessageData) => {
            const isMyMessage = currentUser?.uid === message.senderId;
 
   const userPhoto = isMyMessage
-    ? currentUser?.photoURL
+    ? currentUser?.image
     : selectedUser?.photoURL;
 
   const userName = isMyMessage

@@ -1,5 +1,5 @@
 import './ChatListContainer.scss'
-import ChatList from '../../../section/ChatList/ChatList'
+import ChatList from '../ChatList/ChatList'
 import ChatSearchResults from '@/app/section/ChatSearchResults/ChatSearchResults'
 import MessageSearchResults from '@/app/section/MessageSearchResults/MessageSearchResults'
 import { useChatsOpen } from '@/app/StateManagment'
