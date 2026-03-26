@@ -3,7 +3,7 @@ import { FormEventHandler } from "react"
 import '../login/login.scss'
 import { useRouter } from 'next/navigation'
 import { useSession } from "next-auth/react"
-import Form from "@/app/section/Form/Form"
+import Form from "@/widgets/Form/Form"
 export default function SetUsername(){
 	const router = useRouter()
 	const { update } = useSession()

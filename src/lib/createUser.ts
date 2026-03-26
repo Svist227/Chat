@@ -1,5 +1,5 @@
 import { doc, setDoc, serverTimestamp, collection } from "firebase/firestore"
-import { firestore } from "@/firebase"
+import { firestore } from "@/app/firebase"
 
 
 type UserParams = {

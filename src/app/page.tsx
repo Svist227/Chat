@@ -1,18 +1,17 @@
 'use client'
 import { useState } from 'react'
-import Chat from './section/Chat/Chat'
+import Chat from '@/widgets/Chat/Chat'
 import '@/app/App.scss'
-import Sidebar from './section/Sidebar/Sidebar'
-import Content from './section/Content/Content'
-import SearchBar from './section/SearchBar/SearchBar'
-import TopBar from './section/TopBar/TopBar'
-import Messages from './section/Messages/Messages'
-import { ChatProvider } from './ChatContext';
-import MessageInput from './section/MessageInput/MessageInput'
-import ChatListContainer from './section/ChatListContainer/ChatListContainer'
-import { useChatMode, usesChatStore } from './StateManagment'
-import SliderTabs from './components/SliderTabs/SliderTabs'
-
+import Sidebar from '@/widgets/Sidebar/Sidebar'
+import Content from '@/widgets/Content/Content'
+import SearchBar from '@/section/SearchBar/SearchBar'
+import TopBar from '@/section/TopBar/TopBar'
+import Messages from '@/widgets/Messages/Messages'
+import { ChatProvider } from '@/ChatContext';
+import MessageInput from '@/section/MessageInput/MessageInput'
+import ChatListContainer from '@/widgets/ChatListContainer/ChatListContainer'
+import { useChatMode, usesChatStore } from '@/StateManagment'
+import SliderTabs from '@/components/SliderTabs/SliderTabs'
 function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
    

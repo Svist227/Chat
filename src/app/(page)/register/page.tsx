@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { FormEventHandler, useEffect, useState } from 'react'
 
 import { signIn } from "next-auth/react"
-import Form from '@/app/section/Form/Form'
+import Form from '@/widgets/Form/Form'
 
 export default function Register(){
     const router = useRouter()

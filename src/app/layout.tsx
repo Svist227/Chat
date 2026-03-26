@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import './styles/index.scss';
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "../AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,8 +16,6 @@ export const metadata: Metadata = {
   title: "Minix",
 };
 
-
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,12 +25,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <AuthContext>
         <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        
-        {children}
-
-      </body>
+          {children}
+        </body>
       </AuthContext>
-       
     </html>
   );
 }

@@ -1,9 +1,9 @@
 import type {AuthOptions} from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
-import { getChatId } from './app/utils/getChatId';
+import { getChatId } from './utils/getChatId';
 import Credentials from 'next-auth/providers/credentials';
 import { collection, getDocs, query, where } from 'firebase/firestore';
-import { firestore } from '@/firebase';
+import { firestore } from '@/app/firebase';
 
 
 
@@ -70,7 +70,7 @@ async jwt({ token, user }) {
   // дальше используем uid
   if (token.uid) {
     const { doc, getDoc } = await import("firebase/firestore")
-    const { firestore } = await import("@/firebase")
+    const { firestore } = await import("@/app/firebase")
 
     const userRef = doc(firestore, "users", token.uid as string)
     const snap = await getDoc(userRef)
@@ -97,7 +97,7 @@ async jwt({ token, user }) {
 
     async signIn({ user }) {
     const { doc, getDoc, setDoc } = await import("firebase/firestore")
-    const { firestore } = await import("@/firebase")
+    const { firestore } = await import("@/app/firebase")
     const userRef = doc(firestore, "users", user.id)
     const snap = await getDoc(userRef)
 

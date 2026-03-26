@@ -5,7 +5,7 @@ import { FormEventHandler,  useState } from 'react'
 
 
 import { signIn } from "next-auth/react"
-import Form from '@/app/section/Form/Form'
+import Form from '@/widgets/Form/Form'
 
 export default function Login(){
     const router = useRouter()

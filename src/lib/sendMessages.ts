@@ -1,6 +1,6 @@
-import {firestore} from '@/firebase'
+import {firestore} from '@/app/firebase'
 import {  serverTimestamp, doc,setDoc,getDoc,updateDoc } from "firebase/firestore"; // Добавлены collection, addDoc, serverTimestamp
-import { getChatId } from '@/app/utils/getChatId'
+import { getChatId } from '@/utils/getChatId'
 
 
 interface CurrentUserCustom {

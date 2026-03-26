@@ -15,3 +15,96 @@
 
   background-color: red;
 }
+
+
+html {
+    &.is-lock{
+        overflow:hidden;
+    }
+     overflow-y: hidden;
+    
+        &::-webkit-scrollbar{
+            display: none;
+        }
+        
+
+}
+body{
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-family-base);
+     overflow-y: hidden;
+    
+    
+
+    
+}
+
+main{
+    flex-grow: 1;
+    
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6{
+        
+        margin: 0;
+
+}
+
+h1, .h1 {
+    font-weight:700;
+}
+h2, .h2{
+
+    font-weight:700;
+}
+
+h3, .h3{
+
+    font-weight:700;
+}
+h4, .h4{
+
+    font-weight:600
+}
+h5, .h5{
+
+    font-weight:500;
+}
+h6, .h6{
+
+    font-weight:600;
+}
+
+a,
+button,
+input,
+label,  
+textarea,
+select,
+svg * {
+    transition-duration: 0.4s;
+
+}
+
+a {
+    color:inherit;
+
+
+    &[class] {
+        text-decoration: none;
+    }
+}
+
+.error-log{
+			color: red;
+            text-align: center;
+            padding-bottom: 1rem;
+	}
+
+
