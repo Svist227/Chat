@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import './styles/index.scss';
-import { AuthContext } from "./AuthContext";
+import { Providers } from "../store/AuthContext";
+import { manrope } from './fonts'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,13 +26,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <AuthContext>
-        <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        
+        <body className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable}`}>
+              <Providers>
+
         {children}
+      </Providers>
 
       </body>
-      </AuthContext>
        
     </html>
   );

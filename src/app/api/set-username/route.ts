@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { firestore } from "@/firebase";
+import { firestore } from "@/lib/firebase";
 import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
 import { getToken } from "next-auth/jwt";
 

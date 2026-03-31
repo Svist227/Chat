@@ -1,5 +1,5 @@
-import { firestore } from "@/firebase";
-import { createUser } from "@/lib/createUser";
+import { firestore } from "@/lib/firebase";
+import { createUser } from "@/services/createUser";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { NextResponse } from "next/server";
 

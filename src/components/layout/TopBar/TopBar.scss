@@ -1,0 +1,67 @@
+.topbar{
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+    height: 13%;
+    // стили для теневой стенки
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4); /* border-b + border-white/40 */
+
+    backdrop-filter: blur(12px); /* backdrop-blur-md */
+  -webkit-backdrop-filter: blur(12px); /* для Safari */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* shadow-sm */
+  z-index: 10; /* z-10 */
+
+    &__info{
+        display: flex;
+        align-items: center;
+        gap:16px;
+
+        &-burger{
+            cursor: pointer;
+            display: none;
+            width: 30px;
+            height: 30px;
+            @media (max-width:1024px) {
+                display: block;
+               
+            }
+        }
+        &-typing{
+            
+        }
+        
+        &-photo{
+            // @include square(50px);
+            border-radius: 50px;
+            width: 3.5rem;
+            height: auto;
+        }
+
+        &-description div{
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+    }
+    &__icons{
+
+        &-exit{
+            box-sizing: border-box;
+
+        }
+        display: flex;
+        align-items: center; 
+        
+        & img {
+            // @include square(50px);
+             width: 50px;
+            height: 50px;
+            cursor: pointer;
+            &:hover{
+            opacity: 0.5;
+            background-color: #d4d4d4;
+        }   
+        }
+    }
+
+}

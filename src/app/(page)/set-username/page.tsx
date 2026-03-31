@@ -3,7 +3,7 @@ import { FormEventHandler } from "react"
 import '../login/login.scss'
 import { useRouter } from 'next/navigation'
 import { useSession } from "next-auth/react"
-import Form from "@/app/section/Form/Form"
+import Form from "@/components/block/Form/Form"
 export default function SetUsername(){
 	const router = useRouter()
 	const { update } = useSession()
@@ -23,9 +23,7 @@ export default function SetUsername(){
 		})	
 
 		const result = await response.json()
-		console.log('result', result)
 		if (result.success) {
-			console.log('Username успешно обновлен')
 			 await update() // обновляем сессию, чтобы получить новый username
  			 router.refresh()
 			 router.push('/') // редирект на главную страницу

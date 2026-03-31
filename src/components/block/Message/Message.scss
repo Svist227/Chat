@@ -1,0 +1,34 @@
+.message{
+    padding: 4px 12px 4px;
+    // если пользователь другой
+    justify-self: start;
+    background-color: white;
+    border-radius: 12px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap:4px;
+    max-width: 60%; 
+    box-shadow:  4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 
+    0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1))
+    &__text{
+       overflow-wrap:anywhere; 
+        font-weight: 500;
+
+    }
+  
+   
+    
+
+    
+    &.is-me{
+        background-color: #78E378;
+        align-self: flex-end;
+       
+
+    }
+    &__info{
+        text-align: end;
+    }
+   
+}

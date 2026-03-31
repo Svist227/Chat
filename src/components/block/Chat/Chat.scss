@@ -1,0 +1,22 @@
+.chat{
+    position: relative;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    overflow: hidden;
+     background-size: cover;
+
+    border-left: 1px solid rgba(255, 255, 255, 0.4); /* border-b + border-white/40 */
+
+    backdrop-filter: blur(12px); /* backdrop-blur-md */
+  -webkit-backdrop-filter: blur(12px); /* для Safari */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* shadow-sm */
+    @media (max-width: 1024px) {
+        &.is-close{
+            display: none;
+            margin: 0;
+        }
+    }
+    
+}

@@ -5,7 +5,7 @@ import { FormEventHandler,  useState } from 'react'
 
 
 import { signIn } from "next-auth/react"
-import Form from '@/app/section/Form/Form'
+import Form from '@/components/block/Form/Form'
 
 export default function Login(){
     const router = useRouter()
@@ -14,7 +14,6 @@ export default function Login(){
          signIn('google',{ callbackUrl: '/' });  
     }
     const handleLogin:FormEventHandler<HTMLFormElement> = async (event) => {
-        console.log('нажал')
         event.preventDefault() // остановка всплытия
         
 
