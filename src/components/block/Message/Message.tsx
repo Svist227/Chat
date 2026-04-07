@@ -11,7 +11,8 @@ interface MessageProps {
 }
 const Message = ({data}:MessageProps) => {
     return (
-        <div className={classNames("message",{
+        <>
+                <div className={classNames("message",{
             'is-me':data.isUser
         })}>
             <div className="message__text">
@@ -23,6 +24,7 @@ const Message = ({data}:MessageProps) => {
             </div>
             )}
         </div>
+        </>
     )
 }
 

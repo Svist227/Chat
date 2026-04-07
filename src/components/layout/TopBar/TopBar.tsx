@@ -41,14 +41,13 @@ const   TopBar = () => {
             <div className="topbar">
             <div className="topbar__info">
                  <img onClick={MenuOpen} className = 'topbar__info-burger'src='burger.svg' alt="button__burger" />
-                {selectedUser && (
-                    <img src={selectedUser?.photoURL 
-                ?  selectedUser.photoURL
-                : 'users/Avatar.svg'} 
-                    
-                //динамик
+                {selectedUser.photoURL ? (
+                    <img src={selectedUser?.photoURL}
                 className='topbar__info-photo' alt="photo" />
-                )}
+                )
+                :<div className="user-avatar">{selectedUser?.username?.charAt(0)}</div>
+
+            }
                 <div className="topbar__info-description">
                     <div>{selectedUser?.username}</div> 
                     <p>{selectedUser.username !=='Избранное' && (statusText)}</p>

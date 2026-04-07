@@ -42,11 +42,10 @@ const ChatWindow = ({UserParams, mode = 'default'}: ChatWindowProps) => {
     return (
        <div onClick={getId} className="chat-window">
            <div className="chat-window__photo-container" >
-                <img src={UserParams?.photo 
-                ?  UserParams.photo
-                : 'users/Avatar.svg'
+        {UserParams.photo ? (<img src={UserParams.photo} className = 'chat-window__photo'alt="photo" />
+) : <div className="user-avatar">{UserParams?.username?.charAt(0)}</div>}
 
-                } className = 'chat-window__photo'alt="photo" />
+            
             </div>
             <div className="chat-window__description">
                 <div className="chat-window__description-top">
