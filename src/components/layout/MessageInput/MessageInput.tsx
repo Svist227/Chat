@@ -1,5 +1,5 @@
 import './MessageInput.scss'
-import { useEffect, useState } from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { useMessageUi, usesChatStore } from '@/store/StateManagment';
 import { getChatId } from '@/utils/getChatId'
 import { useSession } from 'next-auth/react';
@@ -13,6 +13,7 @@ const MessageInput = () => {
     const database = getDatabase();
     const addMessageUi = useMessageUi(state => state.addMessage)
     const [emojiOpen, setEmojiOpen] = useState(false)
+  // const fileInputRef = useRef(null);
 
     // данные тек-его выбранного user-а с кем переписка
     const selectedUser = usesChatStore(state => state.selectedUser)
@@ -86,6 +87,10 @@ const MessageInput = () => {
   setValue(prev => prev + emoji)
 }
 
+const hanldeImaheSelect = () => {
+
+}
+
 // отмена статуса печатает
   useEffect(()=> {
   const timeId = setTimeout(()=>{
@@ -105,12 +110,22 @@ const MessageInput = () => {
 
   }, [value])
 
+
+
+
+
     return (
               <div className="input">
             <div className="input-wrap">
  
                 <div className="input-actions-left">
-                    <button className="input-icon-btn" type="button" aria-label="Прикрепить файл">
+                    <button className="input-icon-btn" type="button" aria-label="Прикрепить файл"
+                    onClick={hanldeImaheSelect} >
+                        <input type="file" 
+                             accept="image/*"          // только картинки
+                            multiple     
+                           style={{ display: "none" }}
+                            id="file-input" />
                         <IconAttach />
                     </button>
                     <button className="input-icon-btn" type="button" aria-label="Эмодзи">

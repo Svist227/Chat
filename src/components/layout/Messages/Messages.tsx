@@ -26,16 +26,16 @@ const Messages = () => {
 
    
 
+// вернуться 
+// const BottomRef = useRef<HTMLDivElement>(null);
+//     const scrollToBottom = () => {
+//             BottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+//         }
 
-const BottomRef = useRef<HTMLDivElement>(null);
-    const scrollToBottom = () => {
-            BottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-        }
-
-    // автопролистование до нижнего сообщения
-useLayoutEffect(() => {
-  scrollToBottom()
-}, [renderMessages.length])
+//     // автопролистование до нижнего сообщения
+// useLayoutEffect(() => {
+//   scrollToBottom()
+// }, [renderMessages.length])
 
 
 
@@ -111,7 +111,8 @@ const showDateDivider = isNewDay(currentTime, prevTime)
   
   )
 })}
-            <div ref={BottomRef} />
+            <div  />
+             {/* // для автоскролла к последнему сообщению */}
           </div>
       </div>
     </>
