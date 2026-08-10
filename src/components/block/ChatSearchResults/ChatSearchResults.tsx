@@ -2,14 +2,10 @@ import './ChatSearchResults.scss'
 import ChatWindow from '@/components/block/ChatWindow/ChatWindow'
 import { Timestamp }  from "firebase/firestore";
 import ZeroState from '@/components/block/ZeroState/ZeroState'
+import { UserFilter } from '@/types/userFilter';
 
-interface UserFilter {
-  uid: string,
-  username:string | null
-  email:string | null
-  photoURL: string | null
-  createdAt: Timestamp
-}
+
+
 interface UserData {
     data: UserFilter[]
 }

@@ -1,27 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware'
 
-interface Menu{
-  isChatsOpen:boolean,
-  setIsChatsOpen: () => void
-}
-export const useChatsOpen = create<Menu>(set => ({
-    isChatsOpen:false,
-    setIsChatsOpen: () => set(state => ({
-      isChatsOpen: !state.isChatsOpen
-    }))
-}))
-
-interface Panel {
-  isOpen: boolean;
-  toggle: () => void;
-}
-export const useSettingsPanelStore = create<Panel>((set) => ({
-  isOpen: false,
-  toggle: () => set((state) => ({ isOpen: !state.isOpen })),
-}))
-
-
 
 interface ChatStates {
   selectedUser: User | null
@@ -44,19 +23,6 @@ export const usesChatStore = create<ChatStates>()(
 
 
 
-// получение текущего пользователя
-interface CurrentUserStore {
-  currentUser: User | null;
-  setcurrentUser: (user:User) => void
-}
-
-export const useCurrentUser = create<CurrentUserStore>((set) => ({
-  currentUser: null,
-  setcurrentUser: (user) => set({ currentUser:user })
-
-}))
-
-
 
  
 interface  ValueSearch {
@@ -71,34 +37,6 @@ export const useValueSearch = create<ValueSearch>((set) => ({
 
 
 
-interface ChatListState{
-  mode: string 
-  setMode: (param:string) => void
-}
-
-export const useChatMode = create<ChatListState>((set) => ({
-  mode: 'defoult',
-  setMode: (param) => set({mode:param})
-}))
-
-interface Focus{
-  focusSearch:boolean
-  triggerFocus: () => void
-}
-export const useFocusStore = create<Focus>(set => ({
-  focusSearch: false,
-  triggerFocus: () => set((state) =>  ({focusSearch: !state.focusSearch})  )
-}));
-
-interface MessageID{
-  id:string | null,
-  setMessageId: (idMessage:string) => void
-}
-
-export const useMessageIdStore = create<MessageID>(set => ({
-  id: null,
-  setMessageId: (idMessage) => set({id:idMessage})
-}))
 
 
 
@@ -125,3 +63,65 @@ export const useMessageUi = create<ChatState>((set) => ({
       },
     })),
 }));
+
+
+// Рефакторинг.  // type - messages, chats, default
+// task 1 на union
+type chatMode = 'messages' | 'chats' | 'default'
+
+interface ChatListState{
+  mode: chatMode,
+  setMode: (param:chatMode) => void
+}
+export const useChatMode = create<ChatListState>((set) => ({
+  mode: 'default',
+  setMode: (param) => set({mode:param})
+}))
+
+//task 2 на базовый тип
+
+interface ToggleBollean {
+  isOpen: boolean,
+  toggle: () => void
+}
+
+export const useChatsOpen = create<ToggleBollean>(set => ({
+    isOpen:false,
+    toggle: () => set(state => ({ isOpen: !state.isOpen
+    }))
+}))
+
+export const useSettingsPanelStore = create<ToggleBollean>((set) => ({
+  isOpen: false,
+  toggle: () => set((state) => ({ isOpen: !state.isOpen })),
+}))
+
+export const useFocusStore = create<ToggleBollean>(set => ({
+  isOpen: false,
+  toggle: () => set((state) =>  ({isOpen: !state.isOpen})  )
+}));
+
+// Таск на написать фабрику сторов.
+
+// ДЖЕНЕРИК. (CurrentStore не используется в проекте)
+interface ValueStore<T>{
+  value: T | null,
+  setValue: (param:T) => void
+}
+
+// тут просто value объект User
+export const useCurrentUser = create<ValueStore<User>>((set) => ({
+  value: null,
+  setValue: (user) => set({ value:user })
+
+}))
+
+
+// тут просто строка
+export const useMessageIdStore = create<ValueStore<string>>(set => ({
+  value: null,
+  setValue: (idMessage) => set({value:idMessage})
+}))
+
+
+

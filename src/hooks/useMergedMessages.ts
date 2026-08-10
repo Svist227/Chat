@@ -1,43 +1,26 @@
+import { Message, RawMessage } from '@/types/message'
+import { isMessage } from '@/utils/isMessage'
 import { useMemo } from 'react'
 
-interface Message {
-  id: string
-  text: string
-  senderId: string
-  createdAt: number
-}
 
-interface RawMessage {
-  id: string
-  text: string
-  senderId: string
-  createdAt: any // firestore timestamp
-}
 
 export const useMergedMessages = (messages: RawMessage[],messageUi: Message[]): Message[] => {
 
   // 🔹 нормализация firestore
   const dbMessages = useMemo(() => {
-    return messages
+    return messages          // Проблема map он возвращает резульи массив. а что если элемент ошибочный. то он не пропустится, map обязан что то вернуть
       .map((msg) => {
-        if (!msg?.createdAt) return null
 
-        const createdAt =
-          msg.createdAt?.toDate
-            ? msg.createdAt.toDate().getTime()
-            : msg.createdAt
+       const createdAt = msg.createdAt.toDate().getTime();
 
-        if (!createdAt) return null
+        const message = { ...msg, createdAt}
 
-        return {
-          ...msg,
-          createdAt,
-        }
+        return message
+         
       })
-      .filter(Boolean) as Message[]
   }, [messages])
 
-  // 🔹 merge
+  // Объединение данных с firestore и у моментальных локальных сообщений
   const mergedMessages = useMemo(() => {
     const map = new Map<string, Message>()
 

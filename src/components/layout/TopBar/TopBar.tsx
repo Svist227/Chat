@@ -6,20 +6,20 @@ import formatRelativeDate from '@/utils/formatDate';
 import { useUserStatus } from '@/hooks/useUserStatus';
 import { useTypingStatus } from '@/hooks/useTypingStatus';
 const   TopBar = () => {
-   const MenuOpen = useChatsOpen(state => state.setIsChatsOpen)
+   const MenuOpen = useChatsOpen(state => state.toggle)
     const selectedUser = usesChatStore(state => state.selectedUser)
-   const {status, lastLogin} = useUserStatus()
-   const {print} = useTypingStatus()
+    const {status, lastLogin} = useUserStatus()
+    const {print} = useTypingStatus()
     const setOpenSettingsPanel = useSettingsPanelStore(state => state.toggle)
     const setMode = useChatMode(state => state.setMode)
-    const {triggerFocus}  = useFocusStore();
-    const isOpenMenu = useChatsOpen(state => state.setIsChatsOpen)
+    const {toggle}  = useFocusStore();
+    const isOpenMenu = useChatsOpen(state => state.toggle)
   
     
 
     const handleClickSearch = (e:any) => {
         setMode('messages')
-        triggerFocus()
+        toggle()
         isOpenMenu()
 
     }

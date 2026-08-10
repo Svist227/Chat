@@ -13,7 +13,7 @@ import { useGetMessagesUser } from '@/hooks/getMessagesUser'
 const Messages = () => {
     const selectedUserId = useMessageUi(state => state.selectedChatId)
     const session = useSession()
-    const messages = useGetMessagesUser()
+    const messages = useGetMessagesUser() 
      // соединение Ui и сообщений с бд. в единый поток.
   const messageUi = useMessageUi(state =>
   selectedUserId ? state.messages[selectedUserId] : undefined
@@ -21,7 +21,7 @@ const Messages = () => {
      const renderMessages = useMergedMessages(messages,messageUi)
 
     
-    const RefMessageId = useMessageIdStore(state => state.id) 
+    const RefMessageId = useMessageIdStore(state => state.value) 
     const messageRefs = useRef<Record<string, HTMLDivElement | null>>({})
 
    

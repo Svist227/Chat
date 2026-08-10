@@ -1,39 +1,13 @@
 
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
-import {app, auth, firestore} from '@/lib/firebase'
-import { User } from "firebase/auth"
-import { collection, query, onSnapshot, orderBy, where, Timestamp }  from "firebase/firestore";
-import ChatWindow from '@/components/block/ChatWindow/ChatWindow'
-import {useChatsOpen, usesChatStore, useCurrentUser} from '@/store/StateManagment';
-import { getChatId } from '@/utils/getChatId';
-type MemberInfo = {
-    uid:string,
-    username:string | null
-    photoURL:string | null
-}
+import {firestore} from '@/lib/firebase'
+import { collection, query, onSnapshot, orderBy, where }  from "firebase/firestore";
+import { UserFilter } from '@/types/userFilter';
+import { isUser } from '@/utils/isUser';
+import { ChatMetaSchema } from '@/schemas/ChatMetaSchema';
+import { ChatItem } from '@/schemas/ChatItemSchema';
 
-type ChatItem = {
-    chatId: string
-  otherUser: MemberInfo
-  lastMessage: string
-  time: string | null
-}
-type ChatMeta = {
-  lastMessage: string
-membersInfo: Record<string, MemberInfo>
-  members: string[]
-  updatedAt: Timestamp
-  _localtime: Date
-}
-interface UserFilter {
-  uid: string,
-  username:string | null
-  email:string | null
-  photoURL: string | null
-  createdAt: Timestamp
-}
- 
 
 // получение user-ов и чат-ов
 export const useGetDataUser = () => {
@@ -42,19 +16,29 @@ export const useGetDataUser = () => {
     const session = useSession()
     const CurrentUser = session.data?.user
 
-
-
+    
+ 
      // Получение user-ов всех
         useEffect(() => {
             console.log("Получение всех user-ов")
+
             const usersCollectionRef = collection(firestore, 'users');
             const q = query(usersCollectionRef, orderBy('username')); // Опционально: сортируем по имени пользователя
     
             // Подписываемся на изменения в коллекции в реальном времени
             const unsubscribe = onSnapshot(q, (snapshot) => {
-                const usersData: UserFilter[] = [];
+                const usersData: UserFilter[]=[];
+                
+
                 snapshot.forEach((doc) => {
-                    usersData.push({ ...doc.data(), uid: doc.id } as UserFilter); // Получаем данные и ID документа
+                    const user = { ...doc.data(), uid: doc.id }
+                    if (isUser(user)){
+                      usersData.push(user); // Получаем данные и ID документа
+                    }
+                    else {
+                      console.error('Неверные данные пользователя', user)
+                    }
+                    
                 });
                 setUsers(usersData); // Обновляем состояние с новыми данными
             }, (error) => {
@@ -65,17 +49,14 @@ export const useGetDataUser = () => {
             return () => unsubscribe(); // тяжело не понял
         }, []); // Пустой массив зависимостей означает, что эффект запустится один раз при монтировании
 
+
         useEffect(() =>{
-              
-          console.log('Второй эффект')
-        
+                      
            if (session.status !== "authenticated") return
           const uid = session.data.user?.uid 
           if (!uid) return
           
           const user = session.data?.user
-          
-    
           
             // получение данных чатов для текущего user-а
         const chatRef = query(
@@ -87,8 +68,11 @@ export const useGetDataUser = () => {
     
         const chatItems: ChatItem[] = []
         snapshot.forEach((doc)=>{
-            const data:ChatMeta = doc.data() as ChatMeta
-            // получние id собеседника довольно хитро
+
+            // проверка схемы
+            try {
+              const data  =   ChatMetaSchema.parse(doc.data())
+                   // получние id собеседника довольно хитро
           let otherUserId: string | undefined = data.members.find(id => id !== user.uid)
             if (!otherUserId) {
                 otherUserId = user.uid
@@ -107,7 +91,7 @@ export const useGetDataUser = () => {
           })
       : null
     
-        const dataChat:ChatItem = {
+        const dataChat = {
             chatId: doc.id,
             otherUser: {
                 uid: otherUserId,
@@ -119,6 +103,11 @@ export const useGetDataUser = () => {
     
         }
         chatItems.push(dataChat)
+            }
+
+            catch (error){
+              console.error(`Битый документ ${doc.id}`, error)
+            }
        
         })
         

@@ -5,7 +5,7 @@ interface ComponentProps {
     children:React.ReactNode
 }
 const Chat = ({children}:ComponentProps) => {
-    const isMenuOpen = useChatsOpen(state => state.isChatsOpen)
+    const isMenuOpen = useChatsOpen(state => state.isOpen)
 
     return (
         <>

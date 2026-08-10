@@ -11,7 +11,7 @@ type Item = {
     searchMode:string
 }
 const ChatListContainer = ({searchMode}:Item) => {
-    const isMenuOpen = useChatsOpen(state => state.setIsChatsOpen)
+    const isMenuOpen = useChatsOpen(state => state.toggle)
     const {users, mychats} = useGetDataUser()
     const value = useValueSearch(state => state.currentValue)
     const messages = useGetMessagesUser()

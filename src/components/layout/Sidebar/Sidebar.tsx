@@ -8,7 +8,7 @@ interface ComponentProps {
     children: React.ReactNode;
 }
 const Sidebar:any = ({children}:ComponentProps) => {
-    const isMenuOpen = useChatsOpen(state => state.isChatsOpen)
+    const isMenuOpen = useChatsOpen(state => state.isOpen)
     return (
         <>
             <div className={classNames('sidebar', {

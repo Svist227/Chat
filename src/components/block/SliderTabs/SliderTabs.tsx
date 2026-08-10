@@ -9,7 +9,7 @@ interface SliderTabsProps {
 const modes = ['chats', 'messages']
 
 const SliderTabs = ({ mode, setMode }: SliderTabsProps) => {
-    const {triggerFocus}  = useFocusStore();
+    const triggerFocus  = useFocusStore(state => state.toggle);
   
   const handleSliderClick = (item:string) => {
     setMode(item);

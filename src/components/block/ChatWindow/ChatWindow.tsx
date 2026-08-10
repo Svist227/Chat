@@ -3,14 +3,6 @@ import './ChatWindow.scss'
 import {useMessageIdStore, useMessageUi, usesChatStore} from '@/store/StateManagment';
 
 
-interface Chat {
-    id:string,
-    photo:string,
-    username:string,
-    message: string;
-    data: string | null;
-//   colMessage: number;
-}
 
 interface ChatWindowProps {
   UserParams: Chat;
@@ -18,7 +10,7 @@ interface ChatWindowProps {
 }
 const ChatWindow = ({UserParams, mode = 'default'}: ChatWindowProps) => {
     const setSelectedUser = usesChatStore(state => state.setSelectedUser)
-    const setMessageId = useMessageIdStore(state => state.setMessageId) 
+    const setMessageId = useMessageIdStore(state => state.setValue) 
     const setselectedUserId = useMessageUi(state => state.selectChat)
 
     const getId = () => {

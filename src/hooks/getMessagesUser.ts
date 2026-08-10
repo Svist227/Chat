@@ -4,6 +4,8 @@ import { usesChatStore } from "../store/StateManagment"
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { firestore} from '@/lib/firebase'
 import { useSession } from "next-auth/react"
+import { RawMessage } from "@/types/message"
+import { RawMessageSchema } from "@/schemas/MessageSchema"
 
 
 // получение истории сообщений.
@@ -11,7 +13,7 @@ export const useGetMessagesUser = () => {
     const selectedUser = usesChatStore(state => state.selectedUser) 
     const session = useSession()
     const CurrentUser = session.data?.user
-    const [messages, setMessages] = useState<any[]>([])
+    const [messages, setMessages] = useState<RawMessage[]>([])
     
 
 
@@ -28,8 +30,25 @@ useEffect(() => {
       orderBy('createdAt')
     )
 
+
     const unsub = onSnapshot(q, snapshot => {
-      setMessages(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })))
+        const resultMessage: RawMessage[] = [];
+
+        snapshot.docs.forEach(doc => {
+        try{
+              const message = RawMessageSchema.parse({id: doc.id, ...doc.data() })
+              resultMessage.push(message)
+          }
+
+        catch(e){
+        console.warn('Сообщения пользвателя неккоректны', e)
+      }
+         
+        })
+         
+
+      setMessages(resultMessage)
+     
     })
   
     return () => unsub()

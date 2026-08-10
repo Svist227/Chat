@@ -1,6 +1,13 @@
-interface Message {
-  id: string;
-  text: string;
-  senderId: string;
-  createdAt: number;
-}
+import { RawMessageSchema } from "@/schemas/MessageSchema"
+import { Timestamp } from "firebase/firestore"
+import { z } from "zod"
+
+
+export type RawMessage  = z.infer<typeof RawMessageSchema>
+
+
+
+// Гениально
+export type Message =  Omit<RawMessage, "createdAt"> & {
+        createdAt: number
+    };

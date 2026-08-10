@@ -10,32 +10,32 @@ const SearchBar = () => {
     const value = useValueSearch(state => state.currentValue)
     const setValue = useValueSearch(state => state.setValue)
     const inputRef = useRef<HTMLInputElement>(null);
-    const {focusSearch, triggerFocus} = useFocusStore()
+    const {isOpen, toggle} = useFocusStore()
     const handleChangeInput = (e:React.FormEvent<HTMLInputElement>) => {
     const event = e.currentTarget
     setValue(event.value)
     }
     useEffect(() => {
    
-    if(mode!= 'messages' && mode != 'defoult') return setMode('chats') // не работает что-то
+    if(mode!= 'messages' && mode != 'default') return setMode('chats') // не работает что-то
     // если крик произошел на элементе searchbar__input-inner то chats иначе ь    
 }, [value, mode])
 
     useEffect(() => {
-        if (focusSearch){
+        if (isOpen){
             inputRef.current?.focus()
-             triggerFocus()
+             toggle()
         }
-    }, [focusSearch])
+    }, [isOpen])
     
     const handleCLickCross = () => {
         setValue('')
-        setMode('defoult')
+        setMode('default')
     }
 
     const handleBack = (e:React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Backspace' && !value) {
-            setMode('defoult')
+            setMode('default')
             e.currentTarget.blur()
 
   }
@@ -61,7 +61,7 @@ const SearchBar = () => {
             ref={inputRef}
             />
 
-            {mode != 'defoult' && (
+            {mode != 'default' && (
                 <img src="cross.svg" alt="nn" className='searchbar__input-img' onClick={handleCLickCross}/>
 
             )}
