@@ -1,10 +1,11 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware'
-
+import { MyUser } from '@/types/user';
+import { Message } from '@/types/message';
 
 interface ChatStates {
-  selectedUser: User | null
-  setSelectedUser: (user: User) => void
+  selectedUser: MyUser | null
+  setSelectedUser: (user: MyUser) => void
 }
 
 export const usesChatStore = create<ChatStates>()(
@@ -78,30 +79,32 @@ export const useChatMode = create<ChatListState>((set) => ({
   setMode: (param) => set({mode:param})
 }))
 
-//task 2 на базовый тип
+//task 2 на базовый тип. фабрика однотипных сторов.
 
 interface ToggleBollean {
   isOpen: boolean,
   toggle: () => void
 }
 
-export const useChatsOpen = create<ToggleBollean>(set => ({
-    isOpen:false,
-    toggle: () => set(state => ({ isOpen: !state.isOpen
+const createToggleStore = function(){
+    return create<ToggleBollean>(set => ({
+      isOpen:false,
+      toggle: () => set(state => ({ isOpen: !state.isOpen
     }))
 }))
+  }
+  
 
-export const useSettingsPanelStore = create<ToggleBollean>((set) => ({
-  isOpen: false,
-  toggle: () => set((state) => ({ isOpen: !state.isOpen })),
-}))
 
-export const useFocusStore = create<ToggleBollean>(set => ({
-  isOpen: false,
-  toggle: () => set((state) =>  ({isOpen: !state.isOpen})  )
-}));
+export const useChatsOpen = createToggleStore()
 
-// Таск на написать фабрику сторов.
+
+export const useSettingsPanelStore = createToggleStore()
+
+
+export const useFocusStore = createToggleStore()
+
+
 
 // ДЖЕНЕРИК. (CurrentStore не используется в проекте)
 interface ValueStore<T>{
@@ -110,7 +113,7 @@ interface ValueStore<T>{
 }
 
 // тут просто value объект User
-export const useCurrentUser = create<ValueStore<User>>((set) => ({
+export const useCurrentUser = create<ValueStore<MyUser>>((set) => ({
   value: null,
   setValue: (user) => set({ value:user })
 

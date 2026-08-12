@@ -23,5 +23,5 @@ export function isUser(data:unknown): data is UserFilter{
       && (typeof data.uid === 'string')
       && (typeof data.email === 'string')
       && (typeof data.username === 'string') 
-      && (typeof data.photoURL === 'string')
+      && (typeof data.photoURL === 'string' ||  data.photoURL == null)
     }

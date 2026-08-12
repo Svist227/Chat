@@ -53,8 +53,8 @@ export const useGetDataUser = () => {
         useEffect(() =>{
                       
            if (session.status !== "authenticated") return
-          const uid = session.data.user?.uid 
-          if (!uid) return
+          // const uid = session.data.user?.uid 
+          // if (!uid) return
           
           const user = session.data?.user
           

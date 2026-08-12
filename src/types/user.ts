@@ -1,4 +1,4 @@
-interface User {
+export interface MyUser {
   uid: string
   email:string 
   username?:string | null,

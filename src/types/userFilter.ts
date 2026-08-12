@@ -1,7 +1,6 @@
 import { Timestamp } from "firebase/firestore"
-
-
-export interface UserFilter extends User{
+import { MyUser } from "./user"
+export interface UserFilter extends MyUser{
   createdAt: Timestamp
 }
 

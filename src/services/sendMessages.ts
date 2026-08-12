@@ -1,7 +1,7 @@
 import {firestore} from '@/lib/firebase'
 import {  serverTimestamp, doc,setDoc,getDoc,updateDoc } from "firebase/firestore"; // Добавлены collection, addDoc, serverTimestamp
 import { getChatId } from '@/utils/getChatId'
-
+import { MyUser } from '@/types/user';
 
 interface CurrentUserCustom {
     uid:string,
@@ -14,7 +14,7 @@ interface DataMessages{
     id: string, 
     value:string,
     currentUser: CurrentUserCustom,
-    selectedUser:User
+    selectedUser:MyUser
 }
 
 export const SendMessages = async ({id,value,currentUser,selectedUser}:DataMessages) => {
